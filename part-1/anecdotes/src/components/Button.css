@@ -1,0 +1,21 @@
+.btn {
+	display: inline-block;
+	margin: 0 auto;
+	margin-top: 20px;
+	padding: 12px 20px;
+	border-radius: 5px;
+	border: 2px solid rgb(0, 0, 0);
+	background-color: hsl(240, 69%, 63%);
+	color: white;
+	font-weight: bold;
+	box-shadow: 0 0px 2px hsla(0, 0%, 0%, 0.502);
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+.btn:hover {
+	box-shadow: 0 5px 5px hsla(0, 0%, 0%, 0.502);
+}
+
+.btn:active {
+	box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.502);
+}

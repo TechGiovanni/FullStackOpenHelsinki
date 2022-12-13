@@ -1,0 +1,18 @@
+.wrapper {
+	width: 400px;
+	height: 50rem;
+	margin: 0 auto;
+}
+
+.content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+}
+
+.content__text {
+	width: 90%;
+	height: 75px;
+}
