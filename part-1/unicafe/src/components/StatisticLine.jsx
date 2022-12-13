@@ -1,12 +1,16 @@
 import React from "react";
 
-const StatisticLine = ({ text, value }) => {
+const StatisticLine = ({ text, value, children }) => {
 	return (
-		<div>
-			<p>
-				{text} {value}
-			</p>
-		</div>
+		<>
+			<tr>
+				<td>{text}</td>
+				<td>
+					{value}
+					{children}
+				</td>
+			</tr>
+		</>
 	);
 };
 

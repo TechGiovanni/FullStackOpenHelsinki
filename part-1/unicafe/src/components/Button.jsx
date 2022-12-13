@@ -3,7 +3,7 @@ import "./Button.css";
 
 const Button = ({ adjuster, children }) => {
 	return (
-		<div className="btns">
+		<div className="btn_wrapper">
 			<button className="btn" onClick={adjuster}>
 				{children}
 			</button>
