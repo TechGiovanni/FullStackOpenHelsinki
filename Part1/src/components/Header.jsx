@@ -1,7 +1,7 @@
 import React from "react";
 
-function Header(props) {
-	const { name } = props.course;
+function Header({ course }) {
+	const { name } = course;
 	return (
 		<>
 			<h1>{name}</h1>
