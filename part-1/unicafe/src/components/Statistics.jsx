@@ -12,13 +12,13 @@ const Statistics = ({ all, good, neutral, bad }) => {
 		<>
 			<table>
 				<colgroup>
-					<col className="col" />
+					<col className="col" span={2} />
 				</colgroup>
 				<StatisticLine text="good:" value={good} />
 				<StatisticLine text="neutral:" value={neutral} />
 				<StatisticLine text="bad:" value={bad} />
-				<StatisticLine text="All:" value={all} />
-				<StatisticLine text="Average:" value={Math.round(all / 3) / 10} />
+				<StatisticLine text="all:" value={all} />
+				<StatisticLine text="average:" value={Math.round(all / 3) / 10} />
 				<StatisticLine
 					text="Positive:"
 					value={Math.round((good + neutral) / 2) / 10}
