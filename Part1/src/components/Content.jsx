@@ -3,20 +3,13 @@ import Parts from "./Parts";
 
 function Content(props) {
 	// console.log(props.partAndExercises[0]);
+	// destructuring assignment
+	const [part1, exercises1, part2, exercises2, part3, exercises3] = props.parts;
 	return (
 		<div>
-			<Parts
-				part={props.partsAndExercises[0]}
-				exercise={props.partsAndExercises[1]}
-			/>
-			<Parts
-				part={props.partsAndExercises[2]}
-				exercise={props.partsAndExercises[3]}
-			/>
-			<Parts
-				part={props.partsAndExercises[4]}
-				exercise={props.partsAndExercises[5]}
-			/>
+			<Parts part={part1} exercise={exercises1} />
+			<Parts part={part2} exercise={exercises2} />
+			<Parts part={part3} exercise={exercises3} />
 		</div>
 	);
 }
