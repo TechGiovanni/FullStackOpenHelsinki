@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import Statistics from "./components/Statistics";
+import Button from "./components/Button";
 
 const App = () => {
 	// save clicks of each button to its own state
@@ -8,7 +9,6 @@ const App = () => {
 	const [neutral, setNeutral] = useState(0);
 	const [bad, setBad] = useState(0);
 	const [all, allClicks] = useState(0);
-	const [feedback, setFeedback] = useState(false);
 
 	const increaseGood = () => {
 		allClicks(all + 1);
@@ -23,29 +23,16 @@ const App = () => {
 		setBad(bad + 1);
 	};
 
-	const ifFeedback = (good, bad, neutral, all) => {
-		// console.log("good", good);
-		if ((good, bad, neutral) === 0) {
-			return <p>No feedback given </p>;
-		}
-		return (
-			<>
-				<p>Good: {good}</p>
-				<p>Neutral: {neutral}</p>
-				<p>Bad: {bad}</p>
-				<Statistics good={good} neutral={neutral} bad={bad} all={all} />
-			</>
-		);
-	};
-
 	return (
 		<>
-			<h1>Give Feedback</h1>
-			<button onClick={increaseGood}>Good</button>
-			<button onClick={increaseNeutral}>Neutral</button>
-			<button onClick={increaseBad}>Bad</button>
-			<h2>Statistics</h2>
-			{ifFeedback(good, bad, neutral, all)}
+			<div className="App">
+				<h1>Give Feedback</h1>
+				<Button adjuster={increaseGood}>Good</Button>
+				<Button adjuster={increaseNeutral}>Neutral</Button>
+				<Button adjuster={increaseBad}>Bad</Button>
+				<h2>Statistics</h2>
+				<Statistics good={good} bad={bad} neutral={neutral} all={all} />
+			</div>
 		</>
 	);
 };
