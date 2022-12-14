@@ -22,7 +22,6 @@ const App = () => {
 			},
 		],
 	};
-
 	// const parts = [part1, part2, part3];
 
 	return (
