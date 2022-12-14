@@ -3,12 +3,11 @@ import { useState } from "react";
 
 const App = () => {
 	const [newName, setNewName] = useState("");
+	const [newNumber, setNewNumber] = useState("");
 	const [persons, setPersons] = useState([
-		{ name: "Arto Hellas", id: 1 },
-		{ name: "Johnson", id: 2 },
+		{ name: "Arto Hellas", id: 1, number: "123-456-7892" },
+		{ name: "Johnson", id: 2, number: "333-236-5492" },
 	]);
-
-	// const man = {};
 
 	const newNameHandler = (event) => {
 		console.log("Connected to input");
@@ -16,27 +15,22 @@ const App = () => {
 		setNewName(event.target.value);
 	};
 
-	// const validateName = (event) => {
-	// 	event.preventDefault();
-	// 	const map = persons.map((i) => {
-	// 		if (i.name === newName) {
-	// 			return alert(`${newName} is already added to phonebook`);
-	// 		}
-	// 	});
-	// 	return map;
-	// };
+	const newNumberHandler = (event) => {
+		setNewNumber(event.target.value);
+	};
 
 	const addNewPersonHandler = (event) => {
 		event.preventDefault();
-		//
 		let nameAlreadyInserted = false;
+		//
+		// validation checker
 		persons.map((i) => {
 			if (i.name === newName) {
 				nameAlreadyInserted = true;
 			}
 			return nameAlreadyInserted;
 		});
-
+		// Error handler - Sends alert message
 		if (nameAlreadyInserted) {
 			alert(`${newName} is already added to phonebook`);
 			setNewName("");
@@ -46,6 +40,7 @@ const App = () => {
 		if (!nameAlreadyInserted) {
 			const newPersonObject = {
 				name: newName,
+				number: newNumber,
 				id: persons.length + 1,
 			};
 			// console.log("newperson", newPersonObject);
@@ -65,12 +60,19 @@ const App = () => {
 					name: <input value={newName} onChange={newNameHandler} />
 				</div>
 				<div>
+					number: <input value={newNumber} onChange={newNumberHandler} />
+				</div>
+				<div>
 					<button type="submit">add</button>
 				</div>
 			</form>
 			<h2>Numbers</h2>
 			{persons.map((v) => {
-				return <p key={v.id}>{v.name}</p>;
+				return (
+					<p key={v.id}>
+						{v.name} {v.number}
+					</p>
+				);
 			})}
 		</div>
 	);
