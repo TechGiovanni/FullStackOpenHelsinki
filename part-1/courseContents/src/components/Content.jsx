@@ -2,14 +2,19 @@ import React from "react";
 import Parts from "./Parts";
 
 function Content(props) {
-	// console.log(props.parts.parts[0]);
-	const { parts } = props.parts;
+	// Loops through the array.
+	// Grabbing each item, which are objects.
+	// Transforming each object into it's own arrays.
+	// Pushing the transformed array into a new array called title
+	// And passing the title to the parts component to be rendered.
+	const title = [];
+	props.parts.parts.forEach((i) => {
+		return title.push(Object.entries(i));
+	});
 
 	return (
 		<div>
-			<Parts part={parts[0].name} exercise={parts[0].exercises} />
-			<Parts part={parts[1].name} exercise={parts[1].exercises} />
-			<Parts part={parts[2].name} exercise={parts[2].exercises} />
+			<Parts part={title} />
 		</div>
 	);
 }

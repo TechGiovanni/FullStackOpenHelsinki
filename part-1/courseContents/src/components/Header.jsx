@@ -1,10 +1,10 @@
 import React from "react";
 
-function Header({ course }) {
-	const { name } = course;
+function Header(props) {
+	// grabs any name passed in from the props. targeting the title's name
 	return (
 		<>
-			<h1>{name}</h1>
+			<h1>{props.course.name}</h1>
 		</>
 	);
 }

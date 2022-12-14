@@ -6,9 +6,14 @@ import Total from "./Total";
 const Course = (props) => {
 	return (
 		<div>
-			<Header course={props.course} />
-			<Content parts={props.course} />
-			<Total parts={props.course} />
+			{/* course 1  */}
+			<Header course={props.course[0]} />
+			<Content parts={props.course[0]} />
+			<Total parts={props.course[0]} />
+			{/* Course 2 */}
+			<Header course={props.course[1]} />
+			<Content parts={props.course[1]} />
+			<Total parts={props.course[1]} />
 		</div>
 	);
 };
