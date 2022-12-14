@@ -16,17 +16,42 @@ const App = () => {
 		setNewName(event.target.value);
 	};
 
+	// const validateName = (event) => {
+	// 	event.preventDefault();
+	// 	const map = persons.map((i) => {
+	// 		if (i.name === newName) {
+	// 			return alert(`${newName} is already added to phonebook`);
+	// 		}
+	// 	});
+	// 	return map;
+	// };
+
 	const addNewPersonHandler = (event) => {
 		event.preventDefault();
 		//
-		const newPersonObject = {
-			name: newName,
-			id: persons.length + 1,
-		};
+		let nameAlreadyInserted = false;
+		persons.map((i) => {
+			if (i.name === newName) {
+				nameAlreadyInserted = true;
+			}
+			return nameAlreadyInserted;
+		});
+
+		if (nameAlreadyInserted) {
+			alert(`${newName} is already added to phonebook`);
+			setNewName("");
+		}
 		//
-		console.log("newperson", newPersonObject);
-		setPersons(persons.concat(newPersonObject));
-		setNewName("");
+		// console.log("persons", persons);
+		if (!nameAlreadyInserted) {
+			const newPersonObject = {
+				name: newName,
+				id: persons.length + 1,
+			};
+			// console.log("newperson", newPersonObject);
+			setPersons(persons.concat(newPersonObject));
+			setNewName("");
+		}
 	};
 
 	console.log("Person", persons);
