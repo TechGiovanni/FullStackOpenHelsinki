@@ -4,39 +4,43 @@ import { useState } from "react";
 const App = () => {
 	const [newName, setNewName] = useState("");
 	const [newNumber, setNewNumber] = useState("");
+	const [filterInput, setFilterInput] = useState("");
 	const [persons, setPersons] = useState([
-		{ name: "Arto Hellas", id: 1, number: "123-456-7892" },
-		{ name: "Johnson", id: 2, number: "333-236-5492" },
+		{ name: "Arto Hellas", number: "040-123456", id: 1 },
+		{ name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
+		{ name: "Dan Abramov", number: "12-43-234345", id: 3 },
+		{ name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
 	]);
 
+	// Add new Name Input
 	const newNameHandler = (event) => {
-		console.log("Connected to input");
-		console.log("Input text:", event.target.value);
+		// console.log("Connected to input");
+		// console.log("Input text:", event.target.value);
 		setNewName(event.target.value);
 	};
 
+	// Add new Phone Number Input
 	const newNumberHandler = (event) => {
 		setNewNumber(event.target.value);
 	};
 
+	// Add the new person from the form
 	const addNewPersonHandler = (event) => {
 		event.preventDefault();
 		let nameAlreadyInserted = false;
-		//
-		// validation checker
+		// Verify user does not exist.
 		persons.map((i) => {
 			if (i.name === newName) {
 				nameAlreadyInserted = true;
 			}
 			return nameAlreadyInserted;
 		});
-		// Error handler - Sends alert message
+		// Error handler - Sends alert message if user already exists.
 		if (nameAlreadyInserted) {
 			alert(`${newName} is already added to phonebook`);
 			setNewName("");
 		}
-		//
-		// console.log("persons", persons);
+		// Add the new person
 		if (!nameAlreadyInserted) {
 			const newPersonObject = {
 				name: newName,
@@ -48,13 +52,23 @@ const App = () => {
 			setNewName("");
 		}
 	};
-
-	console.log("Person", persons);
+	const setFilterInputHandler = (event) => {
+		setFilterInput(event.target.value);
+	};
 
 	return (
 		<div>
-			<div>debug: {newName}</div>
+			<div>debug name: {newName}</div>
+			<div>debug filter: {filterInput}</div>
+			{/* Title  */}
 			<h2>Phonebook</h2>
+			{/* Filter  */}
+			<p>
+				Filter shown with:{" "}
+				<input value={filterInput} onChange={setFilterInputHandler} />
+			</p>
+			{/* Add new people  */}
+			<h2>Add new</h2>
 			<form onSubmit={addNewPersonHandler}>
 				<div>
 					name: <input value={newName} onChange={newNameHandler} />
@@ -66,6 +80,7 @@ const App = () => {
 					<button type="submit">add</button>
 				</div>
 			</form>
+			{/* render People  */}
 			<h2>Numbers</h2>
 			{persons.map((v) => {
 				return (
