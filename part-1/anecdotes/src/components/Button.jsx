@@ -22,7 +22,7 @@ const Button = (props) => {
 
 	return (
 		<div>
-			<button class="btn" onClick={RandAnecdotesHandler(props)}>
+			<button className="btn" onClick={RandAnecdotesHandler(props)}>
 				{props.children}
 			</button>
 		</div>
