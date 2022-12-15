@@ -13,22 +13,28 @@ const App = () => {
 	const [filteredState, setFilteredState] = useState([]);
 	const [currentValue, setCurrentValue] = useState(null);
 
-	// useEffect(() => {
+	useEffect(() => {
+		console.log("effect Start");
+		const fetchPersons = async () => {
+			const res = await axios.get("http://localhost:3001/persons");
+			setPersons(res.data);
+			setFilteredState(res.data);
+
+			// .then((res) => {
+			// 	console.log("promise fulfilled - Data Arrived");
+			// });
+		};
+		fetchPersons();
+	}, []);
+	// const hook = () => {
 	// 	console.log("effect Start");
 	// 	axios.get("http://localhost:3001/persons").then((response) => {
 	// 		console.log("promise fulfilled - Data Arrived");
 	// 		setPersons(response.data);
+	// 		setFilteredState(response.data);
 	// 	});
-	// }, []);
-	const hook = () => {
-		console.log("effect Start");
-		axios.get("http://localhost:3001/persons").then((response) => {
-			console.log("promise fulfilled - Data Arrived");
-			setPersons(response.data);
-			setFilteredState(response.data);
-		});
-	};
-	useEffect(hook, []);
+	// };
+	// useEffect(hook, []);
 	// console.log("rendered", persons.length, "person");
 	// console.log("After useEffect Persons Data", persons);
 	// console.log("filteredSate", filteredState);
@@ -46,6 +52,7 @@ const App = () => {
 				setCurrentValue={setCurrentValue}
 				setFilteredState={setFilteredState}
 				persons={persons}
+				filteredState={filteredState}
 			/>
 			{/* Add new People  */}
 			<h3>Add new</h3>
