@@ -34,7 +34,7 @@ const PersonalForm = (props) => {
 		}
 
 		//
-		// Add the new person
+		// Adds the new person
 		if (!nameAlreadyInserted) {
 			const newPersonObject = {
 				name: props.newName,
