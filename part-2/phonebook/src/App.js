@@ -1,21 +1,18 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Person from "./components/Person";
 import PersonalForm from "./components/PersonalForm";
 
 const App = () => {
 	const [newName, setNewName] = useState("");
 	const [newNumber, setNewNumber] = useState("");
-	const [persons, setPersons] = useState([
-		{ name: "Arto Hellas", number: "040-123456", id: 1 },
-		{ name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
-		{ name: "Dan Abramov", number: "12-43-234345", id: 3 },
-		{ name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
-	]);
+	const [persons, setPersons] = useState([]);
 	const [filterInput, setFilterInput] = useState("");
-	const [filteredState, setFilteredState] = useState(persons);
+	const [filteredState, setFilteredState] = useState([]);
 	const [currentValue, setCurrentValue] = useState(null);
 
+	//
 	// implemented a search feature for letter typed
 	const setFilterInputHandler = (event) => {
 		setFilterInput(event.target.value);
@@ -24,24 +21,19 @@ const App = () => {
 			// filter the data
 			const result = persons.filter((item, index) => {
 				// console.log("items: ", item.name.toLowerCase());
-				if (
-					item.name
-						.toLocaleLowerCase()
-						.startsWith(event.target.value.toLowerCase())
-				) {
+				if (item.name.startsWith(event.target.value)) {
 					// sets the currentValue of the length of letters that are present/matched
 					setCurrentValue(event.target.value.length);
 					// console.log("currentValue:", currentValue);
+					console.log("currentValue:", currentValue);
 
-					return item.name.toLowerCase().startsWith(event.target.value);
+					return item.name.startsWith(event.target.value);
 				} else {
 					// once the letters typed starts to not match anything anymore, this else gets triggered
 					// this else statement, filters the input already typed
 					// and returns a substring from 0 up until the letters doesn't match anymore
 					// and return the total of matching letters and
-					return item.name
-						.toLowerCase()
-						.startsWith(filterInput.substring(0, currentValue));
+					return item.name.startsWith(filterInput.substring(0, currentValue));
 				}
 				// console.log("The Filtered item", item.name.toLowerCase());
 			});
@@ -52,6 +44,25 @@ const App = () => {
 		}
 	};
 
+	// useEffect(() => {
+	// 	console.log("effect Start");
+	// 	axios.get("http://localhost:3001/persons").then((response) => {
+	// 		console.log("promise fulfilled - Data Arrived");
+	// 		setPersons(response.data);
+	// 	});
+	// }, []);
+	const hook = () => {
+		console.log("effect Start");
+		axios.get("http://localhost:3001/persons").then((response) => {
+			console.log("promise fulfilled - Data Arrived");
+			setPersons(response.data);
+			setFilteredState(response.data);
+		});
+	};
+	useEffect(hook, []);
+	console.log("rendered", persons.length, "person");
+	console.log("After useEffect Persons Data", persons);
+	console.log("filteredSate", filteredState);
 	return (
 		<div>
 			<div>debug name: {newName}</div>
@@ -77,6 +88,7 @@ const App = () => {
 				persons={persons}
 				setPersons={setPersons}
 			/>
+
 			{/* render People  */}
 			<h2>Numbers</h2>
 			<Person filteredState={filteredState} />
