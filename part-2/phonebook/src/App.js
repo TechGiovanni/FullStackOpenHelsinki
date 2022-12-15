@@ -11,7 +11,7 @@ const App = () => {
 	const [persons, setPersons] = useState([]);
 	const [filterInput, setFilterInput] = useState("");
 	const [filteredState, setFilteredState] = useState([]);
-	const [currentValue, setCurrentValue] = useState(null);
+	const [currentValue, setCurrentValue] = useState(1);
 
 	useEffect(() => {
 		console.log("effect Start");
@@ -19,10 +19,6 @@ const App = () => {
 			const res = await axios.get("http://localhost:3001/persons");
 			setPersons(res.data);
 			setFilteredState(res.data);
-
-			// .then((res) => {
-			// 	console.log("promise fulfilled - Data Arrived");
-			// });
 		};
 		fetchPersons();
 	}, []);
@@ -35,9 +31,6 @@ const App = () => {
 	// 	});
 	// };
 	// useEffect(hook, []);
-	// console.log("rendered", persons.length, "person");
-	// console.log("After useEffect Persons Data", persons);
-	// console.log("filteredSate", filteredState);
 	return (
 		<div>
 			<div>debug name: {newName}</div>

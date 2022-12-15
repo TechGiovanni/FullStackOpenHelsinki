@@ -1,5 +1,4 @@
 import React from "react";
-
 const Filter = ({
 	filterInput,
 	currentValue,
@@ -7,32 +6,24 @@ const Filter = ({
 	setFilterInput,
 	setFilteredState,
 	persons,
-	filteredState,
 }) => {
-	// implemented a search feature for letter typed
+	// Implemented the search feature for any letter typed, case sensitive
 	const filterHandling = (event) => {
-		// console.log("filter input");
 		if (event !== "") {
-			console.log("Persons data:", event);
-			// filter the data
+			// filtering the data
 			const result = persons.filter((item, index) => {
-				console.log("inside result function");
 				if (item.name.startsWith(event)) {
-					// sets the currentValue of the length of letters that are present/matched
+					// Sets the currentValue of the length of letters that are present/matched
 					setCurrentValue(event.length);
-					// console.log("currentValue:", currentValue);
-
-					console.log("currentValue:", currentValue);
+					console.log("current Value:", event.length);
 					return item.name.startsWith(event);
 				} else {
-					// once the letters typed starts to not match anything anymore, this else gets triggered
-					// this else statement, filters the input already typed
-					// and returns a substring from 0 up until the letters doesn't match anymore
-					// and return the total of matching letters and
+					// Once the letters typed start to not match anything anymore
+					// this else statement, returns a substring from 0 up until the letters doesn't match anymore and return the total of matching letters based on the substring of letters
 					return item.name.startsWith(event.substring(0, currentValue));
 				}
 			});
-			// console.log("Exit result function");
+			// If no results were found, return a message
 			if (result.length < 1) {
 				const nothing = [
 					{
@@ -41,22 +32,21 @@ const Filter = ({
 						id: persons.length + 1,
 					},
 				];
-				console.log("Inside the if Statment", nothing);
-				console.log("what is result", result.length);
 				return setFilteredState(nothing);
 			} else {
-				console.log("what is result", result.length);
+				// return the items that were found from the filter
 				return setFilteredState(result);
 			}
 		} else {
-			// if the input is empty then set the data back to it's default state
+			// If the input is empty then set the data back to it's default state.
 			return setFilteredState(persons);
 		}
 	};
 
 	const setFilterInputHandler = (event) => {
+		// set the input to what the user typed -> controlled flow
+		// pass the current input to the filter handler
 		setFilterInput(event.target.value);
-		console.log("target:", event.target.value);
 		filterHandling(event.target.value);
 	};
 
