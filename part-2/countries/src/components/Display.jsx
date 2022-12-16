@@ -8,20 +8,22 @@ const Display = ({ filteringData }) => {
 					if (item.ccn3) {
 						return (
 							<li key={item.ccn3}>
-								<p>Name: {item.name.official}</p>
-								<p>
-									Capital: {item.capital ? item.capital[0] : "Nothing Found"}
-								</p>
+								<h3> Country:</h3>
+								<p>{item.name.official}</p>
+								<h3>Capital:</h3>
+								<p>{item.capital ? item.capital[0] : "Nothing Found"}</p>
+								<h3>Continent:</h3>
 								<p>{item.continent}</p>
-								<p>{`They drive on the: ${item.car.side}`}</p>
-								{/* <p>
-								<Image src={item.flags.png} />
-							</p> */}
-								<p></p>
+								<h3>Population</h3>
+								<p>People: {item.population}</p>
+								<h3>Which side of the road people drive on? </h3>
+								<p>{`They drive on the ${item.car.side} side`}</p>
 
-								{/* Number of Countries: {item.length} */}
+								<img src={item.flags.png} />
 
-								{/* {item} */}
+								<p>
+									-------------------------------------------------------------
+								</p>
 							</li>
 						);
 					}
