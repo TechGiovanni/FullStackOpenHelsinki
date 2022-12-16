@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import UserInput from "./components/UserInput";
 import Display from "./components/Display";
 
 function App() {
-	const [userInput, setUserInput] = useState("");
 	const [baseData, setBaseData] = useState([]);
-	const [FilterData, setFilterData] = useState([]);
+	const [userInput, setUserInput] = useState("");
+	const [FilteringData, setFilteringData] = useState([]);
+	const [currentValue, setCurrentValue] = useState(1);
 	//
-	const fetchCountries = async () => {
-		const res = await axios.get("https://restcountries.com/v3.1/all");
-		console.log(res.data);
-		setBaseData(res.data);
-		setFilterData(res.data);
-	};
-	fetchCountries();
+	useEffect(() => {
+		const fetchCountries = async () => {
+			const res = await axios.get("https://restcountries.com/v3.1/all");
+			setBaseData(res.data);
+			setFilteringData(res.data);
+		};
+		fetchCountries();
+	}, []);
+	// console.log("FilteringData", FilteringData);
 
 	return (
 		<>
@@ -23,10 +26,12 @@ function App() {
 				userInput={userInput}
 				setUserInput={setUserInput}
 				baseData={baseData}
-				FilterData={FilterData}
-				setFilterData={setFilterData}
+				FilteringData={FilteringData}
+				setFilteringData={setFilteringData}
+				currentValue={currentValue}
+				setCurrentValue={setCurrentValue}
 			/>
-			<Display filteredData={FilterData} />
+			<Display filteringData={FilteringData} />
 		</>
 	);
 }
