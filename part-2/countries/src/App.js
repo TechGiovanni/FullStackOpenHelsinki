@@ -7,35 +7,42 @@ import Display from "./components/Display";
 function App() {
 	const [baseData, setBaseData] = useState([]);
 	const [userInput, setUserInput] = useState("");
+	const [filteringData, setFilteringData] = useState([]);
 	const [currentValue, setCurrentValue] = useState(1);
-	const [FilteringData, setFilteringData] = useState([]);
 	//
 	useEffect(() => {
-		const fetchCountries = async () => {
-			if (userInput !== "") {
+		if (userInput) {
+			const fetchCountries = async () => {
 				const res = await axios.get(
 					`https://restcountries.com/v3.1/name/${userInput}`
 				);
-				// console.log(userInput);
+
 				setBaseData(res.data);
 				setFilteringData(res.data);
-			}
-		};
-		fetchCountries();
+			};
+			fetchCountries();
+		}
 	}, [userInput]);
-	// console.log("FilteringData", FilteringData);
+
 	return (
 		<>
 			<UserInput
 				userInput={userInput}
 				setUserInput={setUserInput}
 				baseData={baseData}
-				FilteringData={FilteringData}
+				filteringData={filteringData}
 				setFilteringData={setFilteringData}
-				currentValue={currentValue}
 				setCurrentValue={setCurrentValue}
+				currentValue={currentValue}
 			/>
-			<Display filteringData={FilteringData} />
+
+			{userInput.length === 0 && ""}
+			{filteringData.length <= 11 && <Display filteringData={filteringData} />}
+			{filteringData.length > 11 || userInput.length > 1 ? (
+				<p>Too many matches, specify another filter</p>
+			) : (
+				<></>
+			)}
 		</>
 	);
 }

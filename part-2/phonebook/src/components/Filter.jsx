@@ -40,6 +40,7 @@ const Filter = ({
 		} else {
 			// If the input is empty then set the data back to it's default state.
 			return setFilteredState(persons);
+			// return setFilteredState(persons);
 		}
 	};
 
