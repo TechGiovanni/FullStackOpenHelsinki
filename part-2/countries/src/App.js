@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import axios from "axios";
+import UserInput from "./components/UserInput";
+import Display from "./components/Display";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [userInput, setUserInput] = useState("");
+	const [baseData, setBaseData] = useState([]);
+	const [FilterData, setFilterData] = useState([]);
+	//
+	const fetchCountries = async () => {
+		const res = await axios.get("https://restcountries.com/v3.1/all");
+		console.log(res.data);
+		setBaseData(res.data);
+		setFilterData(res.data);
+	};
+	fetchCountries();
+
+	return (
+		<>
+			<UserInput
+				userInput={userInput}
+				setUserInput={setUserInput}
+				baseData={baseData}
+				FilterData={FilterData}
+				setFilterData={setFilterData}
+			/>
+			<Display filteredData={FilterData} />
+		</>
+	);
 }
 
 export default App;
