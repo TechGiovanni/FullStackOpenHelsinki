@@ -7,8 +7,8 @@ import Display from "./components/Display";
 function App() {
 	const [baseData, setBaseData] = useState([]);
 	const [userInput, setUserInput] = useState("");
-	const [FilteringData, setFilteringData] = useState([]);
 	const [currentValue, setCurrentValue] = useState(1);
+	const [FilteringData, setFilteringData] = useState([]);
 	//
 	useEffect(() => {
 		const fetchCountries = async () => {

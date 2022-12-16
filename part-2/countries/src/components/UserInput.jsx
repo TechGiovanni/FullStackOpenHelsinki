@@ -11,6 +11,22 @@ const UserInput = ({
 }) => {
 	const filterHandler = (event) => {
 		// console.log(event);
+		// console.log("event", event);
+		const result = () => {
+			if (event !== "") {
+				baseData.filter((item, index) => {
+					console.log("item", "inside");
+					// if (item.name.startsWith(event)) {
+					// }
+				});
+			} else {
+				return setFilteringData({
+					name: "Type a country",
+				});
+			}
+		};
+
+		return result;
 	};
 
 	const userInputHandler = (event) => {
@@ -19,12 +35,17 @@ const UserInput = ({
 	};
 	return (
 		<>
-			<input
-				type="text"
-				placeholder={"Search Country..."}
-				value={userInput}
-				onChange={userInputHandler}
-			/>
+			<div>
+				<p>Debug: {userInput}</p>
+				<p>Find countries:</p>
+
+				<input
+					type="text"
+					placeholder={"Search Country..."}
+					value={userInput}
+					onChange={userInputHandler}
+				/>
+			</div>
 		</>
 	);
 };
