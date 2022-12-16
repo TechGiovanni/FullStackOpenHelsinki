@@ -12,26 +12,25 @@ const UserInput = ({
 	const filterHandler = (event) => {
 		// console.log(event);
 		// console.log("event", event);
-		const result = () => {
-			if (event !== "") {
-				baseData.filter((item, index) => {
-					console.log("item", "inside");
-					// if (item.name.startsWith(event)) {
-					// }
-				});
-			} else {
-				return setFilteringData({
-					name: "Type a country",
-				});
-			}
-		};
-
-		return result;
+		// const result = () => {
+		// 	if (event !== "") {
+		// 		baseData.filter((item, index) => {
+		// 			console.log("item", "inside");
+		// 			// if (item.name.startsWith(event)) {
+		// 			// }
+		// 		});
+		// 	} else {
+		// 		return setFilteringData({
+		// 			name: "Type a country",
+		// 		});
+		// 	}
+		// };
+		// return result;
 	};
 
 	const userInputHandler = (event) => {
 		setUserInput(event.target.value);
-		filterHandler(event.target.value);
+		// filterHandler(event.target.value);
 	};
 	return (
 		<>

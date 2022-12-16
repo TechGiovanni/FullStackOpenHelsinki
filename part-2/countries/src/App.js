@@ -12,14 +12,18 @@ function App() {
 	//
 	useEffect(() => {
 		const fetchCountries = async () => {
-			const res = await axios.get("https://restcountries.com/v3.1/all");
-			setBaseData(res.data);
-			setFilteringData(res.data);
+			if (userInput !== "") {
+				const res = await axios.get(
+					`https://restcountries.com/v3.1/name/${userInput}`
+				);
+				// console.log(userInput);
+				setBaseData(res.data);
+				setFilteringData(res.data);
+			}
 		};
 		fetchCountries();
-	}, []);
+	}, [userInput]);
 	// console.log("FilteringData", FilteringData);
-
 	return (
 		<>
 			<UserInput
