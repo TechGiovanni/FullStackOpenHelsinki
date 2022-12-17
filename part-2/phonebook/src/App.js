@@ -74,8 +74,11 @@ const App = () => {
 
 	const destroy = (id) => {
 		// const person = persons.find((n) => n.id === id);
-		PersonsController.destroy(id);
-		getPersons();
+		// Ask the user if they really want to delete the resource
+		if (window.confirm("Do you really want to delete?")) {
+			PersonsController.destroy(id);
+			getPersons();
+		}
 	};
 
 	return (
@@ -104,6 +107,7 @@ const App = () => {
 				persons={persons}
 				setPersons={setPersons}
 				getPersons={getPersons}
+				updatePerson={updatePerson}
 			/>
 			{/* Renders the People */}
 			<h2>Numbers</h2>

@@ -14,7 +14,7 @@ const PersonalForm = (props) => {
 
 	// Add the new person from the form
 	const addNewPersonHandler = (event) => {
-		// event.preventDefault();
+		event.preventDefault();
 		let nameAlreadyInserted = false;
 
 		// Verify user does not exist.
@@ -28,14 +28,26 @@ const PersonalForm = (props) => {
 		//
 		// Error handler - Sends alert message if user already exists.
 		if (nameAlreadyInserted) {
-			alert(`${props.newName} is already added to phonebook`);
-			props.setNewName("");
+			if (
+				window.confirm(
+					`${props.newName} is already added to phonebook. Do you still want to update it?`
+				)
+			) {
+				const person = props.persons.find((n) => n.name === props.newName);
+				const id = person.id;
+
+				props.updatePerson(id);
+				props.setNewName("");
+				props.setNewNumber("");
+				props.getPersons();
+			} else {
+				alert(`${props.newName} was already added to phonebook`);
+			}
 		}
 
 		//
 		// Adds the new person
 		if (!nameAlreadyInserted) {
-			event.preventDefault();
 			const newPersonObject = {
 				name: props.newName,
 				number: props.newNumber,
