@@ -1,5 +1,4 @@
 import React from "react";
-// import PersonsController from "../controllers/PersonsController";
 
 const Person = (props) => {
 	return (

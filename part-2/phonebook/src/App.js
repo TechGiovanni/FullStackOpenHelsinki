@@ -1,6 +1,5 @@
 import React from "react";
-import { useState, useEffect, useReducer } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import Person from "./components/Person";
 import PersonalForm from "./components/PersonalForm";
 import Filter from "./components/Filter";
@@ -13,22 +12,13 @@ const App = () => {
 	const [filterInput, setFilterInput] = useState("");
 	const [filteredState, setFilteredState] = useState([]);
 	const [currentValue, setCurrentValue] = useState(1);
-	// first argument is a function to apply changes, whenever we call the forceUpdate
-	// the second value is the initial value of my reducer
-	// const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
-	// get request
+	// get request of all data on the server after the component loads
 	useEffect(() => {
-		// console.log("effect Start");
 		getPersons();
-		// const fetchPersons = async () => {
-		// 	const res = await axios.get("http://localhost:3001/persons");
-		// 	setPersons(res.data);
-		// 	setFilteredState(res.data);
-		// };
-		// fetchPersons();
 	}, []);
 
+	// get all persons from the server
 	function getPersons() {
 		PersonsController.getAll()
 			.then((initialPersons) => {
@@ -39,7 +29,18 @@ const App = () => {
 				alert(`error, ${error}`);
 			});
 	}
-
+	// examples of using useEffect hooks
+	//1
+	// useEffect(() => {
+	// 	getPersons();
+	// const fetchPersons = async () => {
+	// 	const res = await axios.get("http://localhost:3001/persons");
+	// 	setPersons(res.data);
+	// 	setFilteredState(res.data);
+	// };
+	// fetchPersons();
+	// }, []);
+	//2
 	// const hook = () => {
 	// 	console.log("effect Start");
 	// 	axios.get("http://localhost:3001/persons").then((response) => {

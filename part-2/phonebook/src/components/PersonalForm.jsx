@@ -12,7 +12,7 @@ const PersonalForm = (props) => {
 		props.setNewNumber(event.target.value);
 	};
 
-	// Add the new person from the form
+	// Adds the new person from the form
 	const addNewPersonHandler = (event) => {
 		event.preventDefault();
 		let nameAlreadyInserted = false;
@@ -40,8 +40,6 @@ const PersonalForm = (props) => {
 				props.setNewName("");
 				props.setNewNumber("");
 				props.getPersons();
-			} else {
-				alert(`${props.newName} was already added to phonebook`);
 			}
 		}
 
@@ -58,14 +56,6 @@ const PersonalForm = (props) => {
 				props.setNewNumber("");
 				props.getPersons();
 			});
-
-			// axios
-			// 	.post("http://localhost:3001/persons", newPersonObject)
-			// 	.then((response) => {
-			// 		props.setPersons(props.persons.concat(response.data));
-			// 		props.setNewName("");
-			// 		props.setNewNumber("");
-			// 	});
 		}
 	};
 
