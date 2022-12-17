@@ -1,10 +1,10 @@
 import React from "react";
+import axios from "axios";
+import PersonsController from "../controllers/PersonsController";
 
 const PersonalForm = (props) => {
 	// Add new Name Input
 	const newNameHandler = (event) => {
-		// console.log("Connected to input");
-		// console.log("Input text:", event.target.value);
 		props.setNewName(event.target.value);
 	};
 
@@ -15,7 +15,7 @@ const PersonalForm = (props) => {
 
 	// Add the new person from the form
 	const addNewPersonHandler = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 		let nameAlreadyInserted = false;
 
 		// Verify user does not exist.
@@ -36,15 +36,24 @@ const PersonalForm = (props) => {
 		//
 		// Adds the new person
 		if (!nameAlreadyInserted) {
+			// event.preventDefault();
 			const newPersonObject = {
 				name: props.newName,
 				number: props.newNumber,
-				id: props.persons.length + 1,
 			};
+			PersonsController.create(newPersonObject).then((returnedPerson) => {
+				props.setPersons(props.persons.concat(returnedPerson));
+				props.setNewname("");
+				props.setNewNumber("");
+			});
 
-			// console.log("newperson", newPersonObject);
-			props.setPersons(props.persons.concat(newPersonObject));
-			props.setNewName("");
+			// axios
+			// 	.post("http://localhost:3001/persons", newPersonObject)
+			// 	.then((response) => {
+			// 		props.setPersons(props.persons.concat(response.data));
+			// 		props.setNewName("");
+			// 		props.setNewNumber("");
+			// 	});
 		}
 	};
 

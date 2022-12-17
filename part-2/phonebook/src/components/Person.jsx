@@ -5,9 +5,13 @@ const Person = (props) => {
 		<>
 			{props.filteredState.map((v) => {
 				return (
-					<p key={v.id}>
-						{v.name} {v.number}
-					</p>
+					<div>
+						<p key={v.id}>
+							{v.name} {v.number} {"  "}
+							<button>Delete</button> {"  "}
+							<button>Update</button>
+						</p>
+					</div>
 				);
 			})}
 		</>

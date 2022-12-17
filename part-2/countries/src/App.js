@@ -17,7 +17,6 @@ function App() {
 					`https://restcountries.com/v3.1/name/${userInput}`
 				);
 
-				setBaseData(res.data);
 				setFilteringData(res.data);
 			};
 			fetchCountries();

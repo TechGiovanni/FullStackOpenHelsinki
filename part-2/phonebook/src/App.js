@@ -4,23 +4,30 @@ import axios from "axios";
 import Person from "./components/Person";
 import PersonalForm from "./components/PersonalForm";
 import Filter from "./components/Filter";
+import PersonsController from "./controllers/PersonsController";
 
 const App = () => {
-	const [newName, setNewName] = useState("");
+	const [newName, setNewName] = useState(null);
 	const [newNumber, setNewNumber] = useState("");
 	const [persons, setPersons] = useState([]);
 	const [filterInput, setFilterInput] = useState("");
 	const [filteredState, setFilteredState] = useState([]);
 	const [currentValue, setCurrentValue] = useState(1);
 
+	// get request
 	useEffect(() => {
-		console.log("effect Start");
-		const fetchPersons = async () => {
-			const res = await axios.get("http://localhost:3001/persons");
-			setPersons(res.data);
-			setFilteredState(res.data);
-		};
-		fetchPersons();
+		// console.log("effect Start");
+		PersonsController.getAll().then((initialPersons) => {
+			setPersons(initialPersons);
+			setFilteredState(initialPersons);
+		});
+
+		// const fetchPersons = async () => {
+		// 	const res = await axios.get("http://localhost:3001/persons");
+		// 	setPersons(res.data);
+		// 	setFilteredState(res.data);
+		// };
+		// fetchPersons();
 	}, []);
 	// const hook = () => {
 	// 	console.log("effect Start");
