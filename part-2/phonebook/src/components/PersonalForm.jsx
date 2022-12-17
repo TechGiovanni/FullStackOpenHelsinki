@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import PersonsController from "../controllers/PersonsController";
 
 const PersonalForm = (props) => {
@@ -36,15 +35,16 @@ const PersonalForm = (props) => {
 		//
 		// Adds the new person
 		if (!nameAlreadyInserted) {
-			// event.preventDefault();
+			event.preventDefault();
 			const newPersonObject = {
 				name: props.newName,
 				number: props.newNumber,
 			};
 			PersonsController.create(newPersonObject).then((returnedPerson) => {
 				props.setPersons(props.persons.concat(returnedPerson));
-				props.setNewname("");
+				props.setNewName("");
 				props.setNewNumber("");
+				props.getPersons();
 			});
 
 			// axios

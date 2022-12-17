@@ -1,4 +1,5 @@
 import React from "react";
+// import PersonsController from "../controllers/PersonsController";
 
 const Person = (props) => {
 	return (
@@ -8,8 +9,8 @@ const Person = (props) => {
 					<div>
 						<p key={v.id}>
 							{v.name} {v.number} {"  "}
-							<button>Delete</button> {"  "}
-							<button>Update</button>
+							<button onClick={() => props.destroy(v.id)}>Delete</button> {"  "}
+							<button onClick={() => props.updatePerson(v.id)}>Update</button>
 						</p>
 					</div>
 				);
